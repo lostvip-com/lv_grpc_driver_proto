@@ -19,7 +19,7 @@ message QueryProductListResponse {
 
 message QueryProductByIdRequest {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string id = 2;
+  int64 id = 2;
 }
 
 enum ProductNodeType {
@@ -39,7 +39,7 @@ enum ProductNetType {
 
 message Product {
   uint64 createAt = 1;
-  string id = 2;
+  int64 id = 2;
   string name = 3;
   string description = 4;
   ProductNodeType NodeType = 5;//产品的节点类型
@@ -55,7 +55,7 @@ message Product {
 
 message Properties {
   string modelName = 1;
-  string productId = 2;
+  int64  productId = 2;
   string name = 3;
   string code = 4;
   string description = 5;
@@ -67,7 +67,7 @@ message Properties {
 
 message Events {
   string ModelName = 1;
-  string productId = 2;
+  int64  productId = 2;
   string name = 3;
   string code = 4;
   bool required = 8;
@@ -109,7 +109,7 @@ message TypeSpec {
 
 message Actions {
   string ModelName = 1;
-  string productId = 2;
+  int64  productId = 2;
   string name = 3;
   string code = 4;
   bool required = 9;

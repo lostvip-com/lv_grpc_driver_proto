@@ -30,7 +30,7 @@ import "drivercommon/common.proto";
 // 物模型
 message ThingModelMsg {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string deviceId = 2; // 下发的目标设备id
+  int64  deviceId = 2; // 下发的目标设备id
   OperationType operationType = 3;
   string data = 4;
 }
@@ -67,7 +67,7 @@ enum OperationType {
 }
 
 message ThingModelIssueMsg {
-  string deviceId = 1; // 下发的目标设备id
+  int64  deviceId = 1; // 下发的目标设备id
   OperationType operationType = 2;
   string data = 3;
 }

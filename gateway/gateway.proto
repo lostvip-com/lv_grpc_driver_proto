@@ -10,6 +10,6 @@ service RpcGateway {
 
 message GateWayInfoResponse {
   string env = 2;
-  string gw_id = 3;
-  string local_key = 4;
+  int64  gwId = 3;
+  string localKey = 4;
 }

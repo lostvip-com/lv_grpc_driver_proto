@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package drivercommon;
 import "google/protobuf/empty.proto";
+import public "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/drivercommon";
 
 enum IotPlatform {
@@ -36,7 +38,7 @@ message CommonResponse {
 }
 
 message Pong {
-   string timestamp = 2;
+   google.protobuf.Timestamp timestamp = 2;
 }
 
 message VersionResponse {

@@ -5,7 +5,7 @@ import "drivercommon/common.proto";
 
 message ConnectIotPlatformRequest {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string deviceId = 2;
+  int64  deviceId = 2;
 }
 
 message ConnectIotPlatformResponse {
@@ -18,7 +18,7 @@ message ConnectIotPlatformResponse {
 
 message DisconnectIotPlatformRequest {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string deviceId = 2;
+  int64  deviceId = 2;
 }
 
 
@@ -32,7 +32,7 @@ message DisconnectIotPlatformResponse {
 
 message QueryDeviceByIdRequest {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string Id = 2;
+  int64 id = 2;
 }
 
 
@@ -53,13 +53,13 @@ enum DeviceStatus {
 }
 
 message Device {
-  string id = 1;
+  int64 id = 1;
   string name = 2;
   string description = 3;
-  string product_id = 4;
+  int64 productId = 4;
   DeviceStatus status = 5;
   drivercommon.IotPlatform platform = 6;
-  string device_sn  = 7;
+  string deviceSn   = 7;
   string secret = 8;
   map<string, string> External = 9;
 }
@@ -79,9 +79,9 @@ message QueryDeviceListResponse {
 
 message AddDevice {
   string name = 1;
-  string product_id = 2;
+  int64 productId = 2;
   string description = 3;
-  string device_sn    = 4;
+  string deviceSn     = 4;
   map<string, string> External = 5;
 }
 
@@ -113,7 +113,7 @@ message CreateDeviceAndConnectRequestResponse {
 
 message DeleteDeviceRequest {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string deviceId = 2;
+  int64  deviceId = 2;
 }
 
 message DeleteDeviceResponse {
@@ -122,7 +122,7 @@ message DeleteDeviceResponse {
 
 message GetDeviceConnectStatusRequest {
   drivercommon.BaseRequestMessage baseRequest = 1;
-  string deviceId = 2;
+  int64  deviceId = 2;
 }
 
 enum ConnectStatus {

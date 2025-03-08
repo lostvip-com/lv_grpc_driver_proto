@@ -14,14 +14,14 @@ enum CloudInstanceStatus {
 }
 
 message QueryCloudInstanceByPlatformResponse {
-  string CloudInstanceId = 1;
+  int64 CloudInstanceId = 1;
   string Address = 2;
   string CloudInstanceName = 3;
   CloudInstanceStatus status = 4;
 }
 
 message DriverReportPlatformInfoRequest {
-  string driverInstanceId = 1;
+  int64 driverInstanceId = 1;
   drivercommon.IotPlatform iotPlatform = 2;
 }
 

@@ -2,22 +2,24 @@ syntax = "proto3";
 package productcallback;
 option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/productcallback";
 import "google/protobuf/empty.proto";
+import public "google/protobuf/timestamp.proto";
+
 import "driverproduct/product.proto";
 
 
 message createProductCallbackRequest {
   driverproduct.Product Data = 1;
-  uint64 happenTime = 2;
+  google.protobuf.Timestamp happenTime = 2;
 }
 
 message updateProductCallbackRequest {
   driverproduct.Product Data = 1;
-  uint64 happenTime = 2;
+  google.protobuf.Timestamp happenTime = 2;
 }
 
 message deleteProductCallbackRequest {
-  string productId  =1;
-  uint64 happenTime = 2;
+  int64  productId  =1;
+  google.protobuf.Timestamp happenTime = 2;
 }
 
 service ProductCallBackService {
