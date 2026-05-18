@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package data;
+option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/data";
+import "google/protobuf/timestamp.proto";
+import "device/device.proto";
+
+enum OperationType {
+  UNSPECIFIED = 0;
+  PROPERTY_SET = 1;
+  PROPERTY_GET = 2;
+  SERVICE_EXECUTE = 3;
+  PROPERTY_REPORT_RESPONSE = 4;
+  EVENT_REPORT_RESPONSE = 5;
+  DATA_BATCH_REPORT_RESPONSE = 6;
+  PROPERTY_DESIRED_GET_RESPONSE = 7;
+  PROPERTY_DESIRED_DELETE_RESPONSE = 8;
+  CUSTOM_MQTT_PUBLISH = 9;
+  PROPERTY_REPORT = 20;
+  PROPERTY_SET_RESPONSE = 21;
+  PROPERTY_GET_RESPONSE = 22;
+  SERVICE_EXECUTE_RESPONSE = 23;
+  EVENT_REPORT = 24;
+  DATA_BATCH_REPORT = 25;
+  PROPERTY_DESIRED_GET = 26;
+  PROPERTY_DESIRED_DELETE = 27;
+}
+
+message Point {
+  string code = 1;
+  string value = 2;
+  google.protobuf.Timestamp time = 3;
+  string dataType = 4;
+  string rate = 5;
+}
+
+message Command {
+  OperationType type = 1;
+  string traceId = 2;
+  string gatewayCode = 3;
+  string deviceCode = 4;
+  bool   needAck = 5;
+  repeated Point points = 6;
+}
+
+message SubscribeRequest {
+  string driverCode = 1;
+  string instanceId = 2;
+}
+
+service DataService {
+  rpc Send(Command) returns (device.Response) {}
+  rpc Report(Command) returns (device.Response) {}
+  rpc Subscribe(SubscribeRequest) returns (stream Command) {}
+}
