@@ -6,33 +6,28 @@ option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/device";
 enum ConnectStatus {
   OFFLINE = 0;
   ONLINE = 1;
-  UNACTIVE = 2;
+  INACTIVE = 2;
   DISABLE = 3;
   UNKNOWN = 4;
 }
 
 message Device {
-  int64  id = 1;
-  string name = 2;
-  string productCode = 3;
-  string deviceSn = 4;
-  string secret = 5;
-  map<string, string> extra = 6;
+  string traceId = 1;
+  int64  id = 2;
+  string name = 3;
+  string productCode = 4;
+  string deviceCode = 5;
+  string secret = 6;
+  map<string, string> extra = 7;
 }
 
-message AddDevice {
-  string name = 1;
-  string productCode = 2;
-  string deviceSn = 3;
-  map<string, string> extra = 4;
-}
 
 message Request {
   string traceId = 1;
-  string iotPlatform = 2;
+  string driverName = 2;
   oneof param {
     string    deviceCode = 3;
-    AddDevice addDevice = 4;
+    Device device = 4;
   }
 }
 
@@ -49,10 +44,13 @@ message Response {
 }
 
 service RpcDevice {
+  rpc Save(Request) returns (Response) {}
+
   rpc Connect(Request) returns (Response) {}
   rpc Disconnect(Request) returns (Response) {}
+  rpc KeepAlive(Request) returns (Response) {}
+
   rpc GetStatus(Request) returns (Response) {}
   rpc QueryByCode(Request) returns (Response) {}
-  rpc Save(Request) returns (Response) {}
   rpc Delete(Request) returns (Response) {}
 }

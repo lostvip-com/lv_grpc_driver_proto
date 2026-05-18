@@ -8,11 +8,8 @@ message Pong {
   string timestamp = 1;
 }
 
-message VersionResponse {
-  string version = 1;
-}
 
-message DriverRegisterRequest {
+message DriverRegReq {
   string traceId = 1;
   int64  instanceId = 2;
   string address = 3;
@@ -22,7 +19,7 @@ message DriverRegisterRequest {
   string extra = 7;
 }
 
-message DriverRegisterResponse {
+message DriverRegResp {
   string traceId = 1;
   string msg = 2;
   int32  code = 3;
@@ -31,18 +28,30 @@ message DriverRegisterResponse {
   string extra = 6;
 }
 
-message CloudInstanceResponse {
-  int64  id = 1;
-  string address = 2;
-  string name = 3;
-  string status = 4;
+message HeartbeatRequest {
+  string traceId = 1;
+  int64  instanceId = 2;
 }
+
+message HeartbeatResponse {
+  string traceId = 1;
+  string msg = 2;
+  int32  code = 3;
+  bool   success = 4;
+}
+
+message DriverUnregisterRequest {
+  string traceId = 1;
+  int64  instanceId = 2;
+}
+
 
 service Common {
   rpc Ping(google.protobuf.Empty) returns (Pong) {}
-  rpc Version(google.protobuf.Empty) returns (VersionResponse) {}
 }
 
-service CloudInstanceService {
-  rpc DriverRegister(DriverRegisterRequest) returns (DriverRegisterResponse) {}
+service DriverInstanceService {
+  rpc DriverReg(DriverRegReq) returns (DriverRegResp) {}
+  rpc DriverHeartbeat(HeartbeatRequest) returns (HeartbeatResponse) {}
+  rpc DriverUnregister(DriverUnregisterRequest) returns (DriverRegResp) {}
 }
