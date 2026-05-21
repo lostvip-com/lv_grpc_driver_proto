@@ -13,8 +13,8 @@ message Property {
   string dataType = 7;
   int32  scale = 8;
   string unit = 9;
-  string remark = 10;
-  string extra = 11;
+  string extra = 10;
+  string remark = 11;
 }
 
 message Action {
@@ -24,10 +24,8 @@ message Action {
   string tag = 4;
   string name = 5;
   string callType = 6;
-  string inputParams = 7;
-  string outputParams = 8;
-  string remark = 9;
-  string extra = 10;
+  string extra = 7;
+  string remark = 8;
 }
 
 message Event {
@@ -37,9 +35,8 @@ message Event {
   string code = 4;
   string tag = 5;
   string name = 6;
-  string outputParams = 7;
+  string extra = 7;
   string remark = 8;
-  string extra = 10;
 }
 
 message LoadThingModelRequest {
@@ -53,9 +50,10 @@ message LoadThingModelResponse {
   int32  code = 3;
   bool   success = 4;
   string name = 5;
-  repeated Property properties = 6;
-  repeated Action   actions = 7;
-  repeated Event    events = 8;
+  string extra = 6;
+  repeated Property properties = 7;
+  repeated Action   actions = 8;
+  repeated Event    events = 9;
 }
 
 service RpcProduct {
