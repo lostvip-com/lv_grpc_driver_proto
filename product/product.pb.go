@@ -30,7 +30,6 @@ type Property struct {
 	Tag           string                 `protobuf:"bytes,5,opt,name=tag,proto3" json:"tag,omitempty"`
 	AccessMode    string                 `protobuf:"bytes,6,opt,name=accessMode,proto3" json:"accessMode,omitempty"`
 	DataType      string                 `protobuf:"bytes,7,opt,name=dataType,proto3" json:"dataType,omitempty"`
-	Scale         int32                  `protobuf:"varint,8,opt,name=scale,proto3" json:"scale,omitempty"`
 	Unit          string                 `protobuf:"bytes,9,opt,name=unit,proto3" json:"unit,omitempty"`
 	Extra         string                 `protobuf:"bytes,10,opt,name=extra,proto3" json:"extra,omitempty"`
 	Remark        string                 `protobuf:"bytes,11,opt,name=remark,proto3" json:"remark,omitempty"`
@@ -115,13 +114,6 @@ func (x *Property) GetDataType() string {
 		return x.DataType
 	}
 	return ""
-}
-
-func (x *Property) GetScale() int32 {
-	if x != nil {
-		return x.Scale
-	}
-	return 0
 }
 
 func (x *Property) GetUnit() string {
@@ -509,7 +501,7 @@ var File_product_product_proto protoreflect.FileDescriptor
 
 const file_product_product_proto_rawDesc = "" +
 	"\n" +
-	"\x15product/product.proto\x12\aproduct\"\x86\x02\n" +
+	"\x15product/product.proto\x12\aproduct\"\xf0\x01\n" +
 	"\bProperty\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1c\n" +
 	"\tproductId\x18\x02 \x01(\x03R\tproductId\x12\x12\n" +
@@ -519,8 +511,7 @@ const file_product_product_proto_rawDesc = "" +
 	"\n" +
 	"accessMode\x18\x06 \x01(\tR\n" +
 	"accessMode\x12\x1a\n" +
-	"\bdataType\x18\a \x01(\tR\bdataType\x12\x14\n" +
-	"\x05scale\x18\b \x01(\x05R\x05scale\x12\x12\n" +
+	"\bdataType\x18\a \x01(\tR\bdataType\x12\x12\n" +
 	"\x04unit\x18\t \x01(\tR\x04unit\x12\x14\n" +
 	"\x05extra\x18\n" +
 	" \x01(\tR\x05extra\x12\x16\n" +
