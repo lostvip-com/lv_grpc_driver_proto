@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package driver;
+option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/driver";
+import "google/protobuf/empty.proto";
+
+message Pong {
+  string timestamp = 1;
+}
+
+
+message DriverRegReq {
+  string traceId = 1;
+  int64  instanceId = 2;
+  string address = 3;
+  string driverType = 4;
+  string iotPlatform = 5;
+  string driverName = 6;
+  string extra = 7;
+}
+
+message DriverRegResp {
+  string traceId = 1;
+  string msg = 2;
+  int32  code = 3;
+  bool   success = 4;
+  int64  instanceId = 5;
+  string extra = 6;
+}
+
+message HeartbeatRequest {
+  string traceId = 1;
+  int64  instanceId = 2;
+}
+
+message HeartbeatResponse {
+  string traceId = 1;
+  string msg = 2;
+  int32  code = 3;
+  bool   success = 4;
+}
+
+message DriverUnregisterRequest {
+  string traceId = 1;
+  int64  instanceId = 2;
+}
+
+
+service Common {
+  rpc Ping(google.protobuf.Empty) returns (Pong) {}
+}
+
+service DriverInstanceService {
+  rpc DriverReg(DriverRegReq) returns (DriverRegResp) {}
+  rpc DriverHeartbeat(HeartbeatRequest) returns (HeartbeatResponse) {}
+  rpc DriverUnregister(DriverUnregisterRequest) returns (DriverRegResp) {}
+}
