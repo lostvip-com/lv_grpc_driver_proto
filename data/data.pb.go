@@ -43,6 +43,8 @@ const (
 	OperationType_DATA_BATCH_REPORT                OperationType = 25
 	OperationType_PROPERTY_DESIRED_GET             OperationType = 26
 	OperationType_PROPERTY_DESIRED_DELETE          OperationType = 27
+	OperationType_ALARM_REPORT                     OperationType = 30
+	OperationType_ALARM_RECOVER                    OperationType = 31
 )
 
 // Enum value maps for OperationType.
@@ -66,6 +68,8 @@ var (
 		25: "DATA_BATCH_REPORT",
 		26: "PROPERTY_DESIRED_GET",
 		27: "PROPERTY_DESIRED_DELETE",
+		30: "ALARM_REPORT",
+		31: "ALARM_RECOVER",
 	}
 	OperationType_value = map[string]int32{
 		"UNSPECIFIED":                      0,
@@ -86,6 +90,8 @@ var (
 		"DATA_BATCH_REPORT":                25,
 		"PROPERTY_DESIRED_GET":             26,
 		"PROPERTY_DESIRED_DELETE":          27,
+		"ALARM_REPORT":                     30,
+		"ALARM_RECOVER":                    31,
 	}
 )
 
@@ -192,6 +198,74 @@ func (x *Point) GetRate() string {
 	return ""
 }
 
+type AlarmInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Level         string                 `protobuf:"bytes,1,opt,name=level,proto3" json:"level,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Threshold     string                 `protobuf:"bytes,3,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	CurrentValue  string                 `protobuf:"bytes,4,opt,name=currentValue,proto3" json:"currentValue,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AlarmInfo) Reset() {
+	*x = AlarmInfo{}
+	mi := &file_data_data_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AlarmInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AlarmInfo) ProtoMessage() {}
+
+func (x *AlarmInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_data_data_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AlarmInfo.ProtoReflect.Descriptor instead.
+func (*AlarmInfo) Descriptor() ([]byte, []int) {
+	return file_data_data_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AlarmInfo) GetLevel() string {
+	if x != nil {
+		return x.Level
+	}
+	return ""
+}
+
+func (x *AlarmInfo) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *AlarmInfo) GetThreshold() string {
+	if x != nil {
+		return x.Threshold
+	}
+	return ""
+}
+
+func (x *AlarmInfo) GetCurrentValue() string {
+	if x != nil {
+		return x.CurrentValue
+	}
+	return ""
+}
+
 type Command struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          OperationType          `protobuf:"varint,1,opt,name=type,proto3,enum=data.OperationType" json:"type,omitempty"`
@@ -200,13 +274,14 @@ type Command struct {
 	DeviceCode    string                 `protobuf:"bytes,4,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
 	NeedAck       bool                   `protobuf:"varint,5,opt,name=needAck,proto3" json:"needAck,omitempty"`
 	Points        []*Point               `protobuf:"bytes,6,rep,name=points,proto3" json:"points,omitempty"`
+	Alarm         *AlarmInfo             `protobuf:"bytes,10,opt,name=alarm,proto3" json:"alarm,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Command) Reset() {
 	*x = Command{}
-	mi := &file_data_data_proto_msgTypes[1]
+	mi := &file_data_data_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -218,7 +293,7 @@ func (x *Command) String() string {
 func (*Command) ProtoMessage() {}
 
 func (x *Command) ProtoReflect() protoreflect.Message {
-	mi := &file_data_data_proto_msgTypes[1]
+	mi := &file_data_data_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -231,7 +306,7 @@ func (x *Command) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Command.ProtoReflect.Descriptor instead.
 func (*Command) Descriptor() ([]byte, []int) {
-	return file_data_data_proto_rawDescGZIP(), []int{1}
+	return file_data_data_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Command) GetType() OperationType {
@@ -276,6 +351,13 @@ func (x *Command) GetPoints() []*Point {
 	return nil
 }
 
+func (x *Command) GetAlarm() *AlarmInfo {
+	if x != nil {
+		return x.Alarm
+	}
+	return nil
+}
+
 type SubscribeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DriverCode    string                 `protobuf:"bytes,1,opt,name=driverCode,proto3" json:"driverCode,omitempty"`
@@ -286,7 +368,7 @@ type SubscribeRequest struct {
 
 func (x *SubscribeRequest) Reset() {
 	*x = SubscribeRequest{}
-	mi := &file_data_data_proto_msgTypes[2]
+	mi := &file_data_data_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -298,7 +380,7 @@ func (x *SubscribeRequest) String() string {
 func (*SubscribeRequest) ProtoMessage() {}
 
 func (x *SubscribeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_data_data_proto_msgTypes[2]
+	mi := &file_data_data_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -311,7 +393,7 @@ func (x *SubscribeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeRequest) Descriptor() ([]byte, []int) {
-	return file_data_data_proto_rawDescGZIP(), []int{2}
+	return file_data_data_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SubscribeRequest) GetDriverCode() string {
@@ -341,7 +423,7 @@ type DataResp struct {
 
 func (x *DataResp) Reset() {
 	*x = DataResp{}
-	mi := &file_data_data_proto_msgTypes[3]
+	mi := &file_data_data_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -353,7 +435,7 @@ func (x *DataResp) String() string {
 func (*DataResp) ProtoMessage() {}
 
 func (x *DataResp) ProtoReflect() protoreflect.Message {
-	mi := &file_data_data_proto_msgTypes[3]
+	mi := &file_data_data_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -366,7 +448,7 @@ func (x *DataResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataResp.ProtoReflect.Descriptor instead.
 func (*DataResp) Descriptor() ([]byte, []int) {
-	return file_data_data_proto_rawDescGZIP(), []int{3}
+	return file_data_data_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DataResp) GetTraceId() string {
@@ -416,7 +498,7 @@ type ReportSet struct {
 
 func (x *ReportSet) Reset() {
 	*x = ReportSet{}
-	mi := &file_data_data_proto_msgTypes[4]
+	mi := &file_data_data_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -428,7 +510,7 @@ func (x *ReportSet) String() string {
 func (*ReportSet) ProtoMessage() {}
 
 func (x *ReportSet) ProtoReflect() protoreflect.Message {
-	mi := &file_data_data_proto_msgTypes[4]
+	mi := &file_data_data_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -441,7 +523,7 @@ func (x *ReportSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportSet.ProtoReflect.Descriptor instead.
 func (*ReportSet) Descriptor() ([]byte, []int) {
-	return file_data_data_proto_rawDescGZIP(), []int{4}
+	return file_data_data_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ReportSet) GetTraceId() string {
@@ -486,7 +568,7 @@ type InvocationRequest struct {
 
 func (x *InvocationRequest) Reset() {
 	*x = InvocationRequest{}
-	mi := &file_data_data_proto_msgTypes[5]
+	mi := &file_data_data_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -498,7 +580,7 @@ func (x *InvocationRequest) String() string {
 func (*InvocationRequest) ProtoMessage() {}
 
 func (x *InvocationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_data_data_proto_msgTypes[5]
+	mi := &file_data_data_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -511,7 +593,7 @@ func (x *InvocationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvocationRequest.ProtoReflect.Descriptor instead.
 func (*InvocationRequest) Descriptor() ([]byte, []int) {
-	return file_data_data_proto_rawDescGZIP(), []int{5}
+	return file_data_data_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *InvocationRequest) GetRequestId() string {
@@ -572,7 +654,7 @@ type InvocationResponse struct {
 
 func (x *InvocationResponse) Reset() {
 	*x = InvocationResponse{}
-	mi := &file_data_data_proto_msgTypes[6]
+	mi := &file_data_data_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -584,7 +666,7 @@ func (x *InvocationResponse) String() string {
 func (*InvocationResponse) ProtoMessage() {}
 
 func (x *InvocationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_data_data_proto_msgTypes[6]
+	mi := &file_data_data_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -597,7 +679,7 @@ func (x *InvocationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvocationResponse.ProtoReflect.Descriptor instead.
 func (*InvocationResponse) Descriptor() ([]byte, []int) {
-	return file_data_data_proto_rawDescGZIP(), []int{6}
+	return file_data_data_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *InvocationResponse) GetRequestId() string {
@@ -666,7 +748,12 @@ const file_data_data_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12.\n" +
 	"\x04time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12\x1a\n" +
 	"\bdataType\x18\x04 \x01(\tR\bdataType\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\tR\x04rate\"\xcd\x01\n" +
+	"\x04rate\x18\x05 \x01(\tR\x04rate\"u\n" +
+	"\tAlarmInfo\x12\x14\n" +
+	"\x05level\x18\x01 \x01(\tR\x05level\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1c\n" +
+	"\tthreshold\x18\x03 \x01(\tR\tthreshold\x12\"\n" +
+	"\fcurrentValue\x18\x04 \x01(\tR\fcurrentValue\"\xf4\x01\n" +
 	"\aCommand\x12'\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x13.data.OperationTypeR\x04type\x12\x18\n" +
 	"\atraceId\x18\x02 \x01(\tR\atraceId\x12 \n" +
@@ -675,7 +762,9 @@ const file_data_data_proto_rawDesc = "" +
 	"deviceCode\x18\x04 \x01(\tR\n" +
 	"deviceCode\x12\x18\n" +
 	"\aneedAck\x18\x05 \x01(\bR\aneedAck\x12#\n" +
-	"\x06points\x18\x06 \x03(\v2\v.data.PointR\x06points\"R\n" +
+	"\x06points\x18\x06 \x03(\v2\v.data.PointR\x06points\x12%\n" +
+	"\x05alarm\x18\n" +
+	" \x01(\v2\x0f.data.AlarmInfoR\x05alarm\"R\n" +
 	"\x10SubscribeRequest\x12\x1e\n" +
 	"\n" +
 	"driverCode\x18\x01 \x01(\tR\n" +
@@ -715,7 +804,7 @@ const file_data_data_proto_rawDesc = "" +
 	"\asuccess\x18\x05 \x01(\bR\asuccess\x12\x16\n" +
 	"\x06output\x18\x06 \x01(\tR\x06output\x12\x12\n" +
 	"\x04code\x18\a \x01(\x05R\x04code\x12\x10\n" +
-	"\x03msg\x18\b \x01(\tR\x03msg*\xdd\x03\n" +
+	"\x03msg\x18\b \x01(\tR\x03msg*\x82\x04\n" +
 	"\rOperationType\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROPERTY_SET\x10\x01\x12\x10\n" +
@@ -734,7 +823,9 @@ const file_data_data_proto_rawDesc = "" +
 	"\fEVENT_REPORT\x10\x18\x12\x15\n" +
 	"\x11DATA_BATCH_REPORT\x10\x19\x12\x18\n" +
 	"\x14PROPERTY_DESIRED_GET\x10\x1a\x12\x1b\n" +
-	"\x17PROPERTY_DESIRED_DELETE\x10\x1b2\xcb\x01\n" +
+	"\x17PROPERTY_DESIRED_DELETE\x10\x1b\x12\x10\n" +
+	"\fALARM_REPORT\x10\x1e\x12\x11\n" +
+	"\rALARM_RECOVER\x10\x1f2\xcb\x01\n" +
 	"\vDataService\x12'\n" +
 	"\x04Send\x12\r.data.Command\x1a\x0e.data.DataResp\"\x00\x12)\n" +
 	"\x06Report\x12\r.data.Command\x1a\x0e.data.DataResp\"\x00\x120\n" +
@@ -755,37 +846,39 @@ func file_data_data_proto_rawDescGZIP() []byte {
 }
 
 var file_data_data_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_data_data_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_data_data_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_data_data_proto_goTypes = []any{
 	(OperationType)(0),            // 0: data.OperationType
 	(*Point)(nil),                 // 1: data.Point
-	(*Command)(nil),               // 2: data.Command
-	(*SubscribeRequest)(nil),      // 3: data.SubscribeRequest
-	(*DataResp)(nil),              // 4: data.DataResp
-	(*ReportSet)(nil),             // 5: data.ReportSet
-	(*InvocationRequest)(nil),     // 6: data.InvocationRequest
-	(*InvocationResponse)(nil),    // 7: data.InvocationResponse
-	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
+	(*AlarmInfo)(nil),             // 2: data.AlarmInfo
+	(*Command)(nil),               // 3: data.Command
+	(*SubscribeRequest)(nil),      // 4: data.SubscribeRequest
+	(*DataResp)(nil),              // 5: data.DataResp
+	(*ReportSet)(nil),             // 6: data.ReportSet
+	(*InvocationRequest)(nil),     // 7: data.InvocationRequest
+	(*InvocationResponse)(nil),    // 8: data.InvocationResponse
+	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
 }
 var file_data_data_proto_depIdxs = []int32{
-	8, // 0: data.Point.time:type_name -> google.protobuf.Timestamp
-	0, // 1: data.Command.type:type_name -> data.OperationType
-	1, // 2: data.Command.points:type_name -> data.Point
-	2, // 3: data.ReportSet.commands:type_name -> data.Command
-	1, // 4: data.InvocationRequest.input:type_name -> data.Point
-	2, // 5: data.DataService.Send:input_type -> data.Command
-	2, // 6: data.DataService.Report:input_type -> data.Command
-	5, // 7: data.DataService.BatchReport:input_type -> data.ReportSet
-	3, // 8: data.DataService.Subscribe:input_type -> data.SubscribeRequest
-	4, // 9: data.DataService.Send:output_type -> data.DataResp
-	4, // 10: data.DataService.Report:output_type -> data.DataResp
-	4, // 11: data.DataService.BatchReport:output_type -> data.DataResp
-	2, // 12: data.DataService.Subscribe:output_type -> data.Command
-	9, // [9:13] is the sub-list for method output_type
-	5, // [5:9] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	9,  // 0: data.Point.time:type_name -> google.protobuf.Timestamp
+	0,  // 1: data.Command.type:type_name -> data.OperationType
+	1,  // 2: data.Command.points:type_name -> data.Point
+	2,  // 3: data.Command.alarm:type_name -> data.AlarmInfo
+	3,  // 4: data.ReportSet.commands:type_name -> data.Command
+	1,  // 5: data.InvocationRequest.input:type_name -> data.Point
+	3,  // 6: data.DataService.Send:input_type -> data.Command
+	3,  // 7: data.DataService.Report:input_type -> data.Command
+	6,  // 8: data.DataService.BatchReport:input_type -> data.ReportSet
+	4,  // 9: data.DataService.Subscribe:input_type -> data.SubscribeRequest
+	5,  // 10: data.DataService.Send:output_type -> data.DataResp
+	5,  // 11: data.DataService.Report:output_type -> data.DataResp
+	5,  // 12: data.DataService.BatchReport:output_type -> data.DataResp
+	3,  // 13: data.DataService.Subscribe:output_type -> data.Command
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_data_data_proto_init() }
@@ -799,7 +892,7 @@ func file_data_data_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_data_data_proto_rawDesc), len(file_data_data_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
