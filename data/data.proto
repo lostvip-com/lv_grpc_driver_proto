@@ -23,8 +23,6 @@ enum OperationType {
   DATA_BATCH_REPORT = 25;
   PROPERTY_DESIRED_GET = 26;
   PROPERTY_DESIRED_DELETE = 27;
-  ALARM_REPORT = 30;
-  ALARM_RECOVER = 31;
 }
 
 message Point {
@@ -35,13 +33,6 @@ message Point {
   string rate = 5;
 }
 
-message AlarmInfo {
-  string level = 1;
-  string msg = 2;
-  string threshold = 3;
-  string currentValue = 4;
-}
-
 message Command {
   OperationType type = 1;
   string traceId = 2;
@@ -49,7 +40,6 @@ message Command {
   string deviceCode = 4;
   bool   needAck = 5;
   repeated Point points = 6;
-  AlarmInfo alarm = 10;
 }
 
 message SubscribeRequest {
