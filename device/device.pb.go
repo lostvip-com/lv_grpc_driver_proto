@@ -85,6 +85,7 @@ type Device struct {
 	DeviceCode    string                 `protobuf:"bytes,5,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
 	Secret        string                 `protobuf:"bytes,6,opt,name=secret,proto3" json:"secret,omitempty"`
 	Extra         map[string]string      `protobuf:"bytes,7,rep,name=extra,proto3" json:"extra,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	GatewayId     int64                  `protobuf:"varint,8,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -166,6 +167,13 @@ func (x *Device) GetExtra() map[string]string {
 		return x.Extra
 	}
 	return nil
+}
+
+func (x *Device) GetGatewayId() int64 {
+	if x != nil {
+		return x.GatewayId
+	}
+	return 0
 }
 
 type Request struct {
@@ -392,7 +400,7 @@ var File_device_device_proto protoreflect.FileDescriptor
 
 const file_device_device_proto_rawDesc = "" +
 	"\n" +
-	"\x13device/device.proto\x12\x06device\"\x8b\x02\n" +
+	"\x13device/device.proto\x12\x06device\"\xa9\x02\n" +
 	"\x06Device\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x03R\x02id\x12\x12\n" +
@@ -402,7 +410,8 @@ const file_device_device_proto_rawDesc = "" +
 	"deviceCode\x18\x05 \x01(\tR\n" +
 	"deviceCode\x12\x16\n" +
 	"\x06secret\x18\x06 \x01(\tR\x06secret\x12/\n" +
-	"\x05extra\x18\a \x03(\v2\x19.device.Device.ExtraEntryR\x05extra\x1a8\n" +
+	"\x05extra\x18\a \x03(\v2\x19.device.Device.ExtraEntryR\x05extra\x12\x1c\n" +
+	"\tgatewayId\x18\b \x01(\x03R\tgatewayId\x1a8\n" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +

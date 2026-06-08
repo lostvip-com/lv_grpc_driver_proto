@@ -21,73 +21,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AlarmLevel int32
-
-const (
-	AlarmLevel_ALARM_LEVEL_UNSPECIFIED AlarmLevel = 0
-	AlarmLevel_INFO                    AlarmLevel = 1
-	AlarmLevel_WARN                    AlarmLevel = 2
-	AlarmLevel_CRITICAL                AlarmLevel = 3
-	AlarmLevel_FATAL                   AlarmLevel = 4
-)
-
-// Enum value maps for AlarmLevel.
-var (
-	AlarmLevel_name = map[int32]string{
-		0: "ALARM_LEVEL_UNSPECIFIED",
-		1: "INFO",
-		2: "WARN",
-		3: "CRITICAL",
-		4: "FATAL",
-	}
-	AlarmLevel_value = map[string]int32{
-		"ALARM_LEVEL_UNSPECIFIED": 0,
-		"INFO":                    1,
-		"WARN":                    2,
-		"CRITICAL":                3,
-		"FATAL":                   4,
-	}
-)
-
-func (x AlarmLevel) Enum() *AlarmLevel {
-	p := new(AlarmLevel)
-	*p = x
-	return p
-}
-
-func (x AlarmLevel) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (AlarmLevel) Descriptor() protoreflect.EnumDescriptor {
-	return file_alarm_alarm_proto_enumTypes[0].Descriptor()
-}
-
-func (AlarmLevel) Type() protoreflect.EnumType {
-	return &file_alarm_alarm_proto_enumTypes[0]
-}
-
-func (x AlarmLevel) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use AlarmLevel.Descriptor instead.
-func (AlarmLevel) EnumDescriptor() ([]byte, []int) {
-	return file_alarm_alarm_proto_rawDescGZIP(), []int{0}
-}
-
 type AlarmReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
 	DeviceCode    string                 `protobuf:"bytes,2,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
-	GatewayCode   string                 `protobuf:"bytes,3,opt,name=gatewayCode,proto3" json:"gatewayCode,omitempty"`
+	GatewayId     int64                  `protobuf:"varint,3,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
 	AlarmId       string                 `protobuf:"bytes,4,opt,name=alarmId,proto3" json:"alarmId,omitempty"`
-	Level         AlarmLevel             `protobuf:"varint,5,opt,name=level,proto3,enum=alarm.AlarmLevel" json:"level,omitempty"`
-	IsRecovery    bool                   `protobuf:"varint,6,opt,name=isRecovery,proto3" json:"isRecovery,omitempty"`
-	Msg           string                 `protobuf:"bytes,7,opt,name=msg,proto3" json:"msg,omitempty"`
-	Threshold     string                 `protobuf:"bytes,8,opt,name=threshold,proto3" json:"threshold,omitempty"`
-	CurrentValue  string                 `protobuf:"bytes,9,opt,name=currentValue,proto3" json:"currentValue,omitempty"`
-	PointCode     string                 `protobuf:"bytes,10,opt,name=pointCode,proto3" json:"pointCode,omitempty"`
+	IsRecovery    bool                   `protobuf:"varint,5,opt,name=isRecovery,proto3" json:"isRecovery,omitempty"`
+	Msg           string                 `protobuf:"bytes,6,opt,name=msg,proto3" json:"msg,omitempty"`
+	Threshold     string                 `protobuf:"bytes,7,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	CurrentValue  string                 `protobuf:"bytes,8,opt,name=currentValue,proto3" json:"currentValue,omitempty"`
+	PointCode     string                 `protobuf:"bytes,9,opt,name=pointCode,proto3" json:"pointCode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -136,11 +80,11 @@ func (x *AlarmReportRequest) GetDeviceCode() string {
 	return ""
 }
 
-func (x *AlarmReportRequest) GetGatewayCode() string {
+func (x *AlarmReportRequest) GetGatewayId() int64 {
 	if x != nil {
-		return x.GatewayCode
+		return x.GatewayId
 	}
-	return ""
+	return 0
 }
 
 func (x *AlarmReportRequest) GetAlarmId() string {
@@ -148,13 +92,6 @@ func (x *AlarmReportRequest) GetAlarmId() string {
 		return x.AlarmId
 	}
 	return ""
-}
-
-func (x *AlarmReportRequest) GetLevel() AlarmLevel {
-	if x != nil {
-		return x.Level
-	}
-	return AlarmLevel_ALARM_LEVEL_UNSPECIFIED
 }
 
 func (x *AlarmReportRequest) GetIsRecovery() bool {
@@ -263,7 +200,7 @@ func (x *AlarmReportResponse) GetSuccess() bool {
 type BatchAlarmReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	GatewayCode   string                 `protobuf:"bytes,2,opt,name=gatewayCode,proto3" json:"gatewayCode,omitempty"`
+	GatewayId     int64                  `protobuf:"varint,2,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
 	DriverCode    string                 `protobuf:"bytes,3,opt,name=driverCode,proto3" json:"driverCode,omitempty"`
 	Alarms        []*AlarmReportRequest  `protobuf:"bytes,4,rep,name=alarms,proto3" json:"alarms,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -307,11 +244,11 @@ func (x *BatchAlarmReportRequest) GetTraceId() string {
 	return ""
 }
 
-func (x *BatchAlarmReportRequest) GetGatewayCode() string {
+func (x *BatchAlarmReportRequest) GetGatewayId() int64 {
 	if x != nil {
-		return x.GatewayCode
+		return x.GatewayId
 	}
-	return ""
+	return 0
 }
 
 func (x *BatchAlarmReportRequest) GetDriverCode() string {
@@ -400,31 +337,29 @@ var File_alarm_alarm_proto protoreflect.FileDescriptor
 
 const file_alarm_alarm_proto_rawDesc = "" +
 	"\n" +
-	"\x11alarm/alarm.proto\x12\x05alarm\"\xc5\x02\n" +
+	"\x11alarm/alarm.proto\x12\x05alarm\"\x98\x02\n" +
 	"\x12AlarmReportRequest\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1e\n" +
 	"\n" +
 	"deviceCode\x18\x02 \x01(\tR\n" +
-	"deviceCode\x12 \n" +
-	"\vgatewayCode\x18\x03 \x01(\tR\vgatewayCode\x12\x18\n" +
-	"\aalarmId\x18\x04 \x01(\tR\aalarmId\x12'\n" +
-	"\x05level\x18\x05 \x01(\x0e2\x11.alarm.AlarmLevelR\x05level\x12\x1e\n" +
+	"deviceCode\x12\x1c\n" +
+	"\tgatewayId\x18\x03 \x01(\x03R\tgatewayId\x12\x18\n" +
+	"\aalarmId\x18\x04 \x01(\tR\aalarmId\x12\x1e\n" +
 	"\n" +
-	"isRecovery\x18\x06 \x01(\bR\n" +
+	"isRecovery\x18\x05 \x01(\bR\n" +
 	"isRecovery\x12\x10\n" +
-	"\x03msg\x18\a \x01(\tR\x03msg\x12\x1c\n" +
-	"\tthreshold\x18\b \x01(\tR\tthreshold\x12\"\n" +
-	"\fcurrentValue\x18\t \x01(\tR\fcurrentValue\x12\x1c\n" +
-	"\tpointCode\x18\n" +
-	" \x01(\tR\tpointCode\"o\n" +
+	"\x03msg\x18\x06 \x01(\tR\x03msg\x12\x1c\n" +
+	"\tthreshold\x18\a \x01(\tR\tthreshold\x12\"\n" +
+	"\fcurrentValue\x18\b \x01(\tR\fcurrentValue\x12\x1c\n" +
+	"\tpointCode\x18\t \x01(\tR\tpointCode\"o\n" +
 	"\x13AlarmReportResponse\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
-	"\asuccess\x18\x04 \x01(\bR\asuccess\"\xa8\x01\n" +
+	"\asuccess\x18\x04 \x01(\bR\asuccess\"\xa4\x01\n" +
 	"\x17BatchAlarmReportRequest\x12\x18\n" +
-	"\atraceId\x18\x01 \x01(\tR\atraceId\x12 \n" +
-	"\vgatewayCode\x18\x02 \x01(\tR\vgatewayCode\x12\x1e\n" +
+	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1c\n" +
+	"\tgatewayId\x18\x02 \x01(\x03R\tgatewayId\x12\x1e\n" +
 	"\n" +
 	"driverCode\x18\x03 \x01(\tR\n" +
 	"driverCode\x121\n" +
@@ -433,14 +368,7 @@ const file_alarm_alarm_proto_rawDesc = "" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
-	"\asuccess\x18\x04 \x01(\bR\asuccess*V\n" +
-	"\n" +
-	"AlarmLevel\x12\x1b\n" +
-	"\x17ALARM_LEVEL_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04INFO\x10\x01\x12\b\n" +
-	"\x04WARN\x10\x02\x12\f\n" +
-	"\bCRITICAL\x10\x03\x12\t\n" +
-	"\x05FATAL\x10\x042\xad\x01\n" +
+	"\asuccess\x18\x04 \x01(\bR\asuccess2\xad\x01\n" +
 	"\fAlarmService\x12F\n" +
 	"\vReportAlarm\x12\x19.alarm.AlarmReportRequest\x1a\x1a.alarm.AlarmReportResponse\"\x00\x12U\n" +
 	"\x10BatchReportAlarm\x12\x1e.alarm.BatchAlarmReportRequest\x1a\x1f.alarm.BatchAlarmReportResponse\"\x00B~\n" +
@@ -459,27 +387,24 @@ func file_alarm_alarm_proto_rawDescGZIP() []byte {
 	return file_alarm_alarm_proto_rawDescData
 }
 
-var file_alarm_alarm_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_alarm_alarm_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_alarm_alarm_proto_goTypes = []any{
-	(AlarmLevel)(0),                  // 0: alarm.AlarmLevel
-	(*AlarmReportRequest)(nil),       // 1: alarm.AlarmReportRequest
-	(*AlarmReportResponse)(nil),      // 2: alarm.AlarmReportResponse
-	(*BatchAlarmReportRequest)(nil),  // 3: alarm.BatchAlarmReportRequest
-	(*BatchAlarmReportResponse)(nil), // 4: alarm.BatchAlarmReportResponse
+	(*AlarmReportRequest)(nil),       // 0: alarm.AlarmReportRequest
+	(*AlarmReportResponse)(nil),      // 1: alarm.AlarmReportResponse
+	(*BatchAlarmReportRequest)(nil),  // 2: alarm.BatchAlarmReportRequest
+	(*BatchAlarmReportResponse)(nil), // 3: alarm.BatchAlarmReportResponse
 }
 var file_alarm_alarm_proto_depIdxs = []int32{
-	0, // 0: alarm.AlarmReportRequest.level:type_name -> alarm.AlarmLevel
-	1, // 1: alarm.BatchAlarmReportRequest.alarms:type_name -> alarm.AlarmReportRequest
-	1, // 2: alarm.AlarmService.ReportAlarm:input_type -> alarm.AlarmReportRequest
-	3, // 3: alarm.AlarmService.BatchReportAlarm:input_type -> alarm.BatchAlarmReportRequest
-	2, // 4: alarm.AlarmService.ReportAlarm:output_type -> alarm.AlarmReportResponse
-	4, // 5: alarm.AlarmService.BatchReportAlarm:output_type -> alarm.BatchAlarmReportResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: alarm.BatchAlarmReportRequest.alarms:type_name -> alarm.AlarmReportRequest
+	0, // 1: alarm.AlarmService.ReportAlarm:input_type -> alarm.AlarmReportRequest
+	2, // 2: alarm.AlarmService.BatchReportAlarm:input_type -> alarm.BatchAlarmReportRequest
+	1, // 3: alarm.AlarmService.ReportAlarm:output_type -> alarm.AlarmReportResponse
+	3, // 4: alarm.AlarmService.BatchReportAlarm:output_type -> alarm.BatchAlarmReportResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_alarm_alarm_proto_init() }
@@ -492,14 +417,13 @@ func file_alarm_alarm_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_alarm_alarm_proto_rawDesc), len(file_alarm_alarm_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      0,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_alarm_alarm_proto_goTypes,
 		DependencyIndexes: file_alarm_alarm_proto_depIdxs,
-		EnumInfos:         file_alarm_alarm_proto_enumTypes,
 		MessageInfos:      file_alarm_alarm_proto_msgTypes,
 	}.Build()
 	File_alarm_alarm_proto = out.File

@@ -3,25 +3,17 @@ syntax = "proto3";
 package alarm;
 option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/alarm";
 
-enum AlarmLevel {
-  ALARM_LEVEL_UNSPECIFIED = 0;
-  INFO = 1;
-  WARN = 2;
-  CRITICAL = 3;
-  FATAL = 4;
-}
 
 message AlarmReportRequest {
   string traceId = 1;
   string deviceCode = 2;
-  string gatewayCode = 3;
+  int64  gatewayId = 3;
   string alarmId = 4;
-  AlarmLevel level = 5;
-  bool isRecovery = 6;
-  string msg = 7;
-  string threshold = 8;
-  string currentValue = 9;
-  string pointCode = 10;
+  bool isRecovery = 5;
+  string msg = 6;
+  string threshold = 7;
+  string currentValue = 8;
+  string pointCode = 9;
 }
 
 message AlarmReportResponse {
@@ -33,7 +25,7 @@ message AlarmReportResponse {
 
 message BatchAlarmReportRequest {
   string traceId = 1;
-  string gatewayCode = 2;
+  int64  gatewayId = 2;
   string driverCode = 3;
   repeated AlarmReportRequest alarms = 4;
 }

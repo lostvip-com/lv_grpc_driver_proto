@@ -196,7 +196,7 @@ type Command struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          OperationType          `protobuf:"varint,1,opt,name=type,proto3,enum=data.OperationType" json:"type,omitempty"`
 	TraceId       string                 `protobuf:"bytes,2,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	GatewayCode   string                 `protobuf:"bytes,3,opt,name=gatewayCode,proto3" json:"gatewayCode,omitempty"`
+	GatewayId     int64                  `protobuf:"varint,3,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
 	DeviceCode    string                 `protobuf:"bytes,4,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
 	NeedAck       bool                   `protobuf:"varint,5,opt,name=needAck,proto3" json:"needAck,omitempty"`
 	Points        []*Point               `protobuf:"bytes,6,rep,name=points,proto3" json:"points,omitempty"`
@@ -248,11 +248,11 @@ func (x *Command) GetTraceId() string {
 	return ""
 }
 
-func (x *Command) GetGatewayCode() string {
+func (x *Command) GetGatewayId() int64 {
 	if x != nil {
-		return x.GatewayCode
+		return x.GatewayId
 	}
-	return ""
+	return 0
 }
 
 func (x *Command) GetDeviceCode() string {
@@ -407,7 +407,7 @@ func (x *DataResp) GetExtra() string {
 type ReportSet struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	GatewayCode   string                 `protobuf:"bytes,2,opt,name=gatewayCode,proto3" json:"gatewayCode,omitempty"`
+	GatewayId     int64                  `protobuf:"varint,2,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
 	DriverCode    string                 `protobuf:"bytes,3,opt,name=driverCode,proto3" json:"driverCode,omitempty"`
 	Commands      []*Command             `protobuf:"bytes,4,rep,name=commands,proto3" json:"commands,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -451,11 +451,11 @@ func (x *ReportSet) GetTraceId() string {
 	return ""
 }
 
-func (x *ReportSet) GetGatewayCode() string {
+func (x *ReportSet) GetGatewayId() int64 {
 	if x != nil {
-		return x.GatewayCode
+		return x.GatewayId
 	}
-	return ""
+	return 0
 }
 
 func (x *ReportSet) GetDriverCode() string {
@@ -666,11 +666,11 @@ const file_data_data_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12.\n" +
 	"\x04time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12\x1a\n" +
 	"\bdataType\x18\x04 \x01(\tR\bdataType\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\tR\x04rate\"\xcd\x01\n" +
+	"\x04rate\x18\x05 \x01(\tR\x04rate\"\xc9\x01\n" +
 	"\aCommand\x12'\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x13.data.OperationTypeR\x04type\x12\x18\n" +
-	"\atraceId\x18\x02 \x01(\tR\atraceId\x12 \n" +
-	"\vgatewayCode\x18\x03 \x01(\tR\vgatewayCode\x12\x1e\n" +
+	"\atraceId\x18\x02 \x01(\tR\atraceId\x12\x1c\n" +
+	"\tgatewayId\x18\x03 \x01(\x03R\tgatewayId\x12\x1e\n" +
 	"\n" +
 	"deviceCode\x18\x04 \x01(\tR\n" +
 	"deviceCode\x12\x18\n" +
@@ -688,10 +688,10 @@ const file_data_data_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
 	"\asuccess\x18\x04 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05extra\x18\x05 \x01(\tR\x05extra\"\x92\x01\n" +
+	"\x05extra\x18\x05 \x01(\tR\x05extra\"\x8e\x01\n" +
 	"\tReportSet\x12\x18\n" +
-	"\atraceId\x18\x01 \x01(\tR\atraceId\x12 \n" +
-	"\vgatewayCode\x18\x02 \x01(\tR\vgatewayCode\x12\x1e\n" +
+	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1c\n" +
+	"\tgatewayId\x18\x02 \x01(\x03R\tgatewayId\x12\x1e\n" +
 	"\n" +
 	"driverCode\x18\x03 \x01(\tR\n" +
 	"driverCode\x12)\n" +

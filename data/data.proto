@@ -36,7 +36,7 @@ message Point {
 message Command {
   OperationType type = 1;
   string traceId = 2;
-  string gatewayCode = 3;
+  int64  gatewayId = 3;
   string deviceCode = 4;
   bool   needAck = 5;
   repeated Point points = 6;
@@ -57,7 +57,7 @@ message DataResp {
 
 message ReportSet {
   string traceId = 1;
-  string gatewayCode = 2;
+  int64  gatewayId = 2;
   string driverCode = 3;
   repeated Command commands = 4;
 }

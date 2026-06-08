@@ -19,6 +19,7 @@ message Device {
   string deviceCode = 5;
   string secret = 6;
   map<string, string> extra = 7;
+  int64  gatewayId = 8;
 }
 
 
