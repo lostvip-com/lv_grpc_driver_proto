@@ -9,6 +9,7 @@ package alarm
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -32,6 +33,7 @@ type AlarmReportRequest struct {
 	Threshold     string                 `protobuf:"bytes,7,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	CurrentValue  string                 `protobuf:"bytes,8,opt,name=currentValue,proto3" json:"currentValue,omitempty"`
 	PointCode     string                 `protobuf:"bytes,9,opt,name=pointCode,proto3" json:"pointCode,omitempty"`
+	Time          *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -127,6 +129,13 @@ func (x *AlarmReportRequest) GetPointCode() string {
 		return x.PointCode
 	}
 	return ""
+}
+
+func (x *AlarmReportRequest) GetTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Time
+	}
+	return nil
 }
 
 type AlarmReportResponse struct {
@@ -337,7 +346,7 @@ var File_alarm_alarm_proto protoreflect.FileDescriptor
 
 const file_alarm_alarm_proto_rawDesc = "" +
 	"\n" +
-	"\x11alarm/alarm.proto\x12\x05alarm\"\x94\x02\n" +
+	"\x11alarm/alarm.proto\x12\x05alarm\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc4\x02\n" +
 	"\x12AlarmReportRequest\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1a\n" +
 	"\bdeviceId\x18\x02 \x01(\x03R\bdeviceId\x12\x1c\n" +
@@ -349,7 +358,9 @@ const file_alarm_alarm_proto_rawDesc = "" +
 	"\x03msg\x18\x06 \x01(\tR\x03msg\x12\x1c\n" +
 	"\tthreshold\x18\a \x01(\tR\tthreshold\x12\"\n" +
 	"\fcurrentValue\x18\b \x01(\tR\fcurrentValue\x12\x1c\n" +
-	"\tpointCode\x18\t \x01(\tR\tpointCode\"o\n" +
+	"\tpointCode\x18\t \x01(\tR\tpointCode\x12.\n" +
+	"\x04time\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\x04time\"o\n" +
 	"\x13AlarmReportResponse\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
@@ -389,18 +400,20 @@ var file_alarm_alarm_proto_goTypes = []any{
 	(*AlarmReportResponse)(nil),      // 1: alarm.AlarmReportResponse
 	(*BatchAlarmReportRequest)(nil),  // 2: alarm.BatchAlarmReportRequest
 	(*BatchAlarmReportResponse)(nil), // 3: alarm.BatchAlarmReportResponse
+	(*timestamppb.Timestamp)(nil),    // 4: google.protobuf.Timestamp
 }
 var file_alarm_alarm_proto_depIdxs = []int32{
-	0, // 0: alarm.BatchAlarmReportRequest.alarms:type_name -> alarm.AlarmReportRequest
-	0, // 1: alarm.AlarmService.ReportAlarm:input_type -> alarm.AlarmReportRequest
-	2, // 2: alarm.AlarmService.BatchReportAlarm:input_type -> alarm.BatchAlarmReportRequest
-	1, // 3: alarm.AlarmService.ReportAlarm:output_type -> alarm.AlarmReportResponse
-	3, // 4: alarm.AlarmService.BatchReportAlarm:output_type -> alarm.BatchAlarmReportResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 0: alarm.AlarmReportRequest.time:type_name -> google.protobuf.Timestamp
+	0, // 1: alarm.BatchAlarmReportRequest.alarms:type_name -> alarm.AlarmReportRequest
+	0, // 2: alarm.AlarmService.ReportAlarm:input_type -> alarm.AlarmReportRequest
+	2, // 3: alarm.AlarmService.BatchReportAlarm:input_type -> alarm.BatchAlarmReportRequest
+	1, // 4: alarm.AlarmService.ReportAlarm:output_type -> alarm.AlarmReportResponse
+	3, // 5: alarm.AlarmService.BatchReportAlarm:output_type -> alarm.BatchAlarmReportResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_alarm_alarm_proto_init() }

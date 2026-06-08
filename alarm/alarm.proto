@@ -2,18 +2,20 @@ syntax = "proto3";
 
 package alarm;
 option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/alarm";
+import "google/protobuf/timestamp.proto";
 
 
 message AlarmReportRequest {
   string traceId = 1;
-  int64 deviceId = 2;
-  int64 gatewayId = 3;
+  int64  deviceId = 2;
+  int64  gatewayId = 3;
   string alarmId = 4;
-  bool isRecovery = 5;
+  bool   isRecovery = 5;
   string msg = 6;
   string threshold = 7;
   string currentValue = 8;
   string pointCode = 9;
+  google.protobuf.Timestamp time = 10;
 }
 
 message AlarmReportResponse {
