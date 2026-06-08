@@ -24,7 +24,7 @@ const (
 type AlarmReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	DeviceCode    string                 `protobuf:"bytes,2,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
+	DeviceId      int64                  `protobuf:"varint,2,opt,name=deviceId,proto3" json:"deviceId,omitempty"`
 	GatewayId     int64                  `protobuf:"varint,3,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
 	AlarmId       string                 `protobuf:"bytes,4,opt,name=alarmId,proto3" json:"alarmId,omitempty"`
 	IsRecovery    bool                   `protobuf:"varint,5,opt,name=isRecovery,proto3" json:"isRecovery,omitempty"`
@@ -73,11 +73,11 @@ func (x *AlarmReportRequest) GetTraceId() string {
 	return ""
 }
 
-func (x *AlarmReportRequest) GetDeviceCode() string {
+func (x *AlarmReportRequest) GetDeviceId() int64 {
 	if x != nil {
-		return x.DeviceCode
+		return x.DeviceId
 	}
-	return ""
+	return 0
 }
 
 func (x *AlarmReportRequest) GetGatewayId() int64 {
@@ -201,7 +201,7 @@ type BatchAlarmReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
 	GatewayId     int64                  `protobuf:"varint,2,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
-	DriverCode    string                 `protobuf:"bytes,3,opt,name=driverCode,proto3" json:"driverCode,omitempty"`
+	DriverId      int64                  `protobuf:"varint,3,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	Alarms        []*AlarmReportRequest  `protobuf:"bytes,4,rep,name=alarms,proto3" json:"alarms,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -251,11 +251,11 @@ func (x *BatchAlarmReportRequest) GetGatewayId() int64 {
 	return 0
 }
 
-func (x *BatchAlarmReportRequest) GetDriverCode() string {
+func (x *BatchAlarmReportRequest) GetDriverId() int64 {
 	if x != nil {
-		return x.DriverCode
+		return x.DriverId
 	}
-	return ""
+	return 0
 }
 
 func (x *BatchAlarmReportRequest) GetAlarms() []*AlarmReportRequest {
@@ -337,12 +337,10 @@ var File_alarm_alarm_proto protoreflect.FileDescriptor
 
 const file_alarm_alarm_proto_rawDesc = "" +
 	"\n" +
-	"\x11alarm/alarm.proto\x12\x05alarm\"\x98\x02\n" +
+	"\x11alarm/alarm.proto\x12\x05alarm\"\x94\x02\n" +
 	"\x12AlarmReportRequest\x12\x18\n" +
-	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1e\n" +
-	"\n" +
-	"deviceCode\x18\x02 \x01(\tR\n" +
-	"deviceCode\x12\x1c\n" +
+	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1a\n" +
+	"\bdeviceId\x18\x02 \x01(\x03R\bdeviceId\x12\x1c\n" +
 	"\tgatewayId\x18\x03 \x01(\x03R\tgatewayId\x12\x18\n" +
 	"\aalarmId\x18\x04 \x01(\tR\aalarmId\x12\x1e\n" +
 	"\n" +
@@ -356,13 +354,11 @@ const file_alarm_alarm_proto_rawDesc = "" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
-	"\asuccess\x18\x04 \x01(\bR\asuccess\"\xa4\x01\n" +
+	"\asuccess\x18\x04 \x01(\bR\asuccess\"\xa0\x01\n" +
 	"\x17BatchAlarmReportRequest\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1c\n" +
-	"\tgatewayId\x18\x02 \x01(\x03R\tgatewayId\x12\x1e\n" +
-	"\n" +
-	"driverCode\x18\x03 \x01(\tR\n" +
-	"driverCode\x121\n" +
+	"\tgatewayId\x18\x02 \x01(\x03R\tgatewayId\x12\x1a\n" +
+	"\bdriverId\x18\x03 \x01(\x03R\bdriverId\x121\n" +
 	"\x06alarms\x18\x04 \x03(\v2\x19.alarm.AlarmReportRequestR\x06alarms\"t\n" +
 	"\x18BatchAlarmReportResponse\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +

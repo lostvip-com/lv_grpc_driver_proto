@@ -27,7 +27,7 @@ message Request {
   string traceId = 1;
   string driverName = 2;
   oneof param {
-    string    deviceCode = 3;
+    int64     deviceId = 3;
     Device device = 4;
   }
 }

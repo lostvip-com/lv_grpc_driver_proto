@@ -197,7 +197,7 @@ type Command struct {
 	Type          OperationType          `protobuf:"varint,1,opt,name=type,proto3,enum=data.OperationType" json:"type,omitempty"`
 	TraceId       string                 `protobuf:"bytes,2,opt,name=traceId,proto3" json:"traceId,omitempty"`
 	GatewayId     int64                  `protobuf:"varint,3,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
-	DeviceCode    string                 `protobuf:"bytes,4,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
+	DeviceId      int64                  `protobuf:"varint,4,opt,name=deviceId,proto3" json:"deviceId,omitempty"`
 	NeedAck       bool                   `protobuf:"varint,5,opt,name=needAck,proto3" json:"needAck,omitempty"`
 	Points        []*Point               `protobuf:"bytes,6,rep,name=points,proto3" json:"points,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -255,11 +255,11 @@ func (x *Command) GetGatewayId() int64 {
 	return 0
 }
 
-func (x *Command) GetDeviceCode() string {
+func (x *Command) GetDeviceId() int64 {
 	if x != nil {
-		return x.DeviceCode
+		return x.DeviceId
 	}
-	return ""
+	return 0
 }
 
 func (x *Command) GetNeedAck() bool {
@@ -278,8 +278,8 @@ func (x *Command) GetPoints() []*Point {
 
 type SubscribeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DriverCode    string                 `protobuf:"bytes,1,opt,name=driverCode,proto3" json:"driverCode,omitempty"`
-	InstanceId    string                 `protobuf:"bytes,2,opt,name=instanceId,proto3" json:"instanceId,omitempty"`
+	DriverName    string                 `protobuf:"bytes,1,opt,name=driverName,proto3" json:"driverName,omitempty"`
+	DriverId      string                 `protobuf:"bytes,2,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -314,16 +314,16 @@ func (*SubscribeRequest) Descriptor() ([]byte, []int) {
 	return file_data_data_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SubscribeRequest) GetDriverCode() string {
+func (x *SubscribeRequest) GetDriverName() string {
 	if x != nil {
-		return x.DriverCode
+		return x.DriverName
 	}
 	return ""
 }
 
-func (x *SubscribeRequest) GetInstanceId() string {
+func (x *SubscribeRequest) GetDriverId() string {
 	if x != nil {
-		return x.InstanceId
+		return x.DriverId
 	}
 	return ""
 }
@@ -408,7 +408,7 @@ type ReportSet struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
 	GatewayId     int64                  `protobuf:"varint,2,opt,name=gatewayId,proto3" json:"gatewayId,omitempty"`
-	DriverCode    string                 `protobuf:"bytes,3,opt,name=driverCode,proto3" json:"driverCode,omitempty"`
+	DriverId      int64                  `protobuf:"varint,3,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	Commands      []*Command             `protobuf:"bytes,4,rep,name=commands,proto3" json:"commands,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -458,11 +458,11 @@ func (x *ReportSet) GetGatewayId() int64 {
 	return 0
 }
 
-func (x *ReportSet) GetDriverCode() string {
+func (x *ReportSet) GetDriverId() int64 {
 	if x != nil {
-		return x.DriverCode
+		return x.DriverId
 	}
-	return ""
+	return 0
 }
 
 func (x *ReportSet) GetCommands() []*Command {
@@ -476,7 +476,7 @@ type InvocationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RequestId     string                 `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
 	TraceId       string                 `protobuf:"bytes,2,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	DeviceCode    string                 `protobuf:"bytes,3,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
+	DeviceId      int64                  `protobuf:"varint,3,opt,name=deviceId,proto3" json:"deviceId,omitempty"`
 	ServiceName   string                 `protobuf:"bytes,4,opt,name=serviceName,proto3" json:"serviceName,omitempty"`
 	Input         []*Point               `protobuf:"bytes,5,rep,name=input,proto3" json:"input,omitempty"`
 	Timeout       int32                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"`
@@ -528,11 +528,11 @@ func (x *InvocationRequest) GetTraceId() string {
 	return ""
 }
 
-func (x *InvocationRequest) GetDeviceCode() string {
+func (x *InvocationRequest) GetDeviceId() int64 {
 	if x != nil {
-		return x.DeviceCode
+		return x.DeviceId
 	}
-	return ""
+	return 0
 }
 
 func (x *InvocationRequest) GetServiceName() string {
@@ -560,7 +560,7 @@ type InvocationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RequestId     string                 `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
 	TraceId       string                 `protobuf:"bytes,2,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	DeviceCode    string                 `protobuf:"bytes,3,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
+	DeviceId      int64                  `protobuf:"varint,3,opt,name=deviceId,proto3" json:"deviceId,omitempty"`
 	ServiceName   string                 `protobuf:"bytes,4,opt,name=serviceName,proto3" json:"serviceName,omitempty"`
 	Success       bool                   `protobuf:"varint,5,opt,name=success,proto3" json:"success,omitempty"`
 	Output        string                 `protobuf:"bytes,6,opt,name=output,proto3" json:"output,omitempty"`
@@ -614,11 +614,11 @@ func (x *InvocationResponse) GetTraceId() string {
 	return ""
 }
 
-func (x *InvocationResponse) GetDeviceCode() string {
+func (x *InvocationResponse) GetDeviceId() int64 {
 	if x != nil {
-		return x.DeviceCode
+		return x.DeviceId
 	}
-	return ""
+	return 0
 }
 
 func (x *InvocationResponse) GetServiceName() string {
@@ -666,51 +666,41 @@ const file_data_data_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value\x12.\n" +
 	"\x04time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12\x1a\n" +
 	"\bdataType\x18\x04 \x01(\tR\bdataType\x12\x12\n" +
-	"\x04rate\x18\x05 \x01(\tR\x04rate\"\xc9\x01\n" +
+	"\x04rate\x18\x05 \x01(\tR\x04rate\"\xc5\x01\n" +
 	"\aCommand\x12'\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x13.data.OperationTypeR\x04type\x12\x18\n" +
 	"\atraceId\x18\x02 \x01(\tR\atraceId\x12\x1c\n" +
-	"\tgatewayId\x18\x03 \x01(\x03R\tgatewayId\x12\x1e\n" +
-	"\n" +
-	"deviceCode\x18\x04 \x01(\tR\n" +
-	"deviceCode\x12\x18\n" +
+	"\tgatewayId\x18\x03 \x01(\x03R\tgatewayId\x12\x1a\n" +
+	"\bdeviceId\x18\x04 \x01(\x03R\bdeviceId\x12\x18\n" +
 	"\aneedAck\x18\x05 \x01(\bR\aneedAck\x12#\n" +
-	"\x06points\x18\x06 \x03(\v2\v.data.PointR\x06points\"R\n" +
+	"\x06points\x18\x06 \x03(\v2\v.data.PointR\x06points\"N\n" +
 	"\x10SubscribeRequest\x12\x1e\n" +
 	"\n" +
-	"driverCode\x18\x01 \x01(\tR\n" +
-	"driverCode\x12\x1e\n" +
-	"\n" +
-	"instanceId\x18\x02 \x01(\tR\n" +
-	"instanceId\"z\n" +
+	"driverName\x18\x01 \x01(\tR\n" +
+	"driverName\x12\x1a\n" +
+	"\bdriverId\x18\x02 \x01(\tR\bdriverId\"z\n" +
 	"\bDataResp\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
 	"\asuccess\x18\x04 \x01(\bR\asuccess\x12\x14\n" +
-	"\x05extra\x18\x05 \x01(\tR\x05extra\"\x8e\x01\n" +
+	"\x05extra\x18\x05 \x01(\tR\x05extra\"\x8a\x01\n" +
 	"\tReportSet\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1c\n" +
-	"\tgatewayId\x18\x02 \x01(\x03R\tgatewayId\x12\x1e\n" +
-	"\n" +
-	"driverCode\x18\x03 \x01(\tR\n" +
-	"driverCode\x12)\n" +
-	"\bcommands\x18\x04 \x03(\v2\r.data.CommandR\bcommands\"\xca\x01\n" +
+	"\tgatewayId\x18\x02 \x01(\x03R\tgatewayId\x12\x1a\n" +
+	"\bdriverId\x18\x03 \x01(\x03R\bdriverId\x12)\n" +
+	"\bcommands\x18\x04 \x03(\v2\r.data.CommandR\bcommands\"\xc6\x01\n" +
 	"\x11InvocationRequest\x12\x1c\n" +
 	"\trequestId\x18\x01 \x01(\tR\trequestId\x12\x18\n" +
-	"\atraceId\x18\x02 \x01(\tR\atraceId\x12\x1e\n" +
-	"\n" +
-	"deviceCode\x18\x03 \x01(\tR\n" +
-	"deviceCode\x12 \n" +
+	"\atraceId\x18\x02 \x01(\tR\atraceId\x12\x1a\n" +
+	"\bdeviceId\x18\x03 \x01(\x03R\bdeviceId\x12 \n" +
 	"\vserviceName\x18\x04 \x01(\tR\vserviceName\x12!\n" +
 	"\x05input\x18\x05 \x03(\v2\v.data.PointR\x05input\x12\x18\n" +
-	"\atimeout\x18\x06 \x01(\x05R\atimeout\"\xe6\x01\n" +
+	"\atimeout\x18\x06 \x01(\x05R\atimeout\"\xe2\x01\n" +
 	"\x12InvocationResponse\x12\x1c\n" +
 	"\trequestId\x18\x01 \x01(\tR\trequestId\x12\x18\n" +
-	"\atraceId\x18\x02 \x01(\tR\atraceId\x12\x1e\n" +
-	"\n" +
-	"deviceCode\x18\x03 \x01(\tR\n" +
-	"deviceCode\x12 \n" +
+	"\atraceId\x18\x02 \x01(\tR\atraceId\x12\x1a\n" +
+	"\bdeviceId\x18\x03 \x01(\x03R\bdeviceId\x12 \n" +
 	"\vserviceName\x18\x04 \x01(\tR\vserviceName\x12\x18\n" +
 	"\asuccess\x18\x05 \x01(\bR\asuccess\x12\x16\n" +
 	"\x06output\x18\x06 \x01(\tR\x06output\x12\x12\n" +

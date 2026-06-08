@@ -182,7 +182,7 @@ type Request struct {
 	DriverName string                 `protobuf:"bytes,2,opt,name=driverName,proto3" json:"driverName,omitempty"`
 	// Types that are valid to be assigned to Param:
 	//
-	//	*Request_DeviceCode
+	//	*Request_DeviceId
 	//	*Request_Device
 	Param         isRequest_Param `protobuf_oneof:"param"`
 	unknownFields protoimpl.UnknownFields
@@ -240,13 +240,13 @@ func (x *Request) GetParam() isRequest_Param {
 	return nil
 }
 
-func (x *Request) GetDeviceCode() string {
+func (x *Request) GetDeviceId() int64 {
 	if x != nil {
-		if x, ok := x.Param.(*Request_DeviceCode); ok {
-			return x.DeviceCode
+		if x, ok := x.Param.(*Request_DeviceId); ok {
+			return x.DeviceId
 		}
 	}
-	return ""
+	return 0
 }
 
 func (x *Request) GetDevice() *Device {
@@ -262,15 +262,15 @@ type isRequest_Param interface {
 	isRequest_Param()
 }
 
-type Request_DeviceCode struct {
-	DeviceCode string `protobuf:"bytes,3,opt,name=deviceCode,proto3,oneof"`
+type Request_DeviceId struct {
+	DeviceId int64 `protobuf:"varint,3,opt,name=deviceId,proto3,oneof"`
 }
 
 type Request_Device struct {
 	Device *Device `protobuf:"bytes,4,opt,name=device,proto3,oneof"`
 }
 
-func (*Request_DeviceCode) isRequest_Param() {}
+func (*Request_DeviceId) isRequest_Param() {}
 
 func (*Request_Device) isRequest_Param() {}
 
@@ -415,15 +415,13 @@ const file_device_device_proto_rawDesc = "" +
 	"\n" +
 	"ExtraEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x94\x01\n" +
 	"\aRequest\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1e\n" +
 	"\n" +
 	"driverName\x18\x02 \x01(\tR\n" +
-	"driverName\x12 \n" +
-	"\n" +
-	"deviceCode\x18\x03 \x01(\tH\x00R\n" +
-	"deviceCode\x12(\n" +
+	"driverName\x12\x1c\n" +
+	"\bdeviceId\x18\x03 \x01(\x03H\x00R\bdeviceId\x12(\n" +
 	"\x06device\x18\x04 \x01(\v2\x0e.device.DeviceH\x00R\x06deviceB\a\n" +
 	"\x05param\"\xdd\x01\n" +
 	"\bResponse\x12\x18\n" +
@@ -507,7 +505,7 @@ func file_device_device_proto_init() {
 		return
 	}
 	file_device_device_proto_msgTypes[1].OneofWrappers = []any{
-		(*Request_DeviceCode)(nil),
+		(*Request_DeviceId)(nil),
 		(*Request_Device)(nil),
 	}
 	file_device_device_proto_msgTypes[2].OneofWrappers = []any{

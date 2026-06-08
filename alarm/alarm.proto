@@ -6,8 +6,8 @@ option go_package = "github.com/lostvip-com/lv_grpc_driver_proto/alarm";
 
 message AlarmReportRequest {
   string traceId = 1;
-  string deviceCode = 2;
-  int64  gatewayId = 3;
+  int64 deviceId = 2;
+  int64 gatewayId = 3;
   string alarmId = 4;
   bool isRecovery = 5;
   string msg = 6;
@@ -26,7 +26,7 @@ message AlarmReportResponse {
 message BatchAlarmReportRequest {
   string traceId = 1;
   int64  gatewayId = 2;
-  string driverCode = 3;
+  int64 driverId = 3;
   repeated AlarmReportRequest alarms = 4;
 }
 

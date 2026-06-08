@@ -37,14 +37,14 @@ message Command {
   OperationType type = 1;
   string traceId = 2;
   int64  gatewayId = 3;
-  string deviceCode = 4;
+  int64  deviceId = 4;
   bool   needAck = 5;
   repeated Point points = 6;
 }
 
 message SubscribeRequest {
-  string driverCode = 1;
-  string instanceId = 2;
+  string driverName = 1;
+  string driverId = 2;
 }
 
 message DataResp {
@@ -58,14 +58,14 @@ message DataResp {
 message ReportSet {
   string traceId = 1;
   int64  gatewayId = 2;
-  string driverCode = 3;
+  int64  driverId = 3;
   repeated Command commands = 4;
 }
 
 message InvocationRequest {
   string requestId = 1;
   string traceId = 2;
-  string deviceCode = 3;
+  int64  deviceId = 3;
   string serviceName = 4;
   repeated Point input = 5;
   int32  timeout = 6;
@@ -74,7 +74,7 @@ message InvocationRequest {
 message InvocationResponse {
   string requestId = 1;
   string traceId = 2;
-  string deviceCode = 3;
+  int64  deviceId = 3;
   string serviceName = 4;
   bool   success = 5;
   string output = 6;
