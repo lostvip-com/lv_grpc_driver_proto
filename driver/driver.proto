@@ -11,7 +11,7 @@ message Pong {
 
 message DriverRegReq {
   string traceId = 1;
-  int64  instanceId = 2;
+  int64  driverId = 2;
   string address = 3;
   string driverType = 4;
   string iotPlatform = 5;
@@ -24,13 +24,13 @@ message DriverRegResp {
   string msg = 2;
   int32  code = 3;
   bool   success = 4;
-  int64  instanceId = 5;
+  int64  driverId = 5;
   string extra = 6;
 }
 
 message HeartbeatRequest {
   string traceId = 1;
-  int64  instanceId = 2;
+  int64  driverId = 2;
 }
 
 message HeartbeatResponse {
@@ -42,7 +42,7 @@ message HeartbeatResponse {
 
 message DriverUnregisterRequest {
   string traceId = 1;
-  int64  instanceId = 2;
+  int64  driverId = 2;
 }
 
 

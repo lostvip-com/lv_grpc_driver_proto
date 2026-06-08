@@ -69,7 +69,7 @@ func (x *Pong) GetTimestamp() string {
 type DriverRegReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	InstanceId    int64                  `protobuf:"varint,2,opt,name=instanceId,proto3" json:"instanceId,omitempty"`
+	DriverId      int64                  `protobuf:"varint,2,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	Address       string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
 	DriverType    string                 `protobuf:"bytes,4,opt,name=driverType,proto3" json:"driverType,omitempty"`
 	IotPlatform   string                 `protobuf:"bytes,5,opt,name=iotPlatform,proto3" json:"iotPlatform,omitempty"`
@@ -116,9 +116,9 @@ func (x *DriverRegReq) GetTraceId() string {
 	return ""
 }
 
-func (x *DriverRegReq) GetInstanceId() int64 {
+func (x *DriverRegReq) GetDriverId() int64 {
 	if x != nil {
-		return x.InstanceId
+		return x.DriverId
 	}
 	return 0
 }
@@ -164,7 +164,7 @@ type DriverRegResp struct {
 	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	Code          int32                  `protobuf:"varint,3,opt,name=code,proto3" json:"code,omitempty"`
 	Success       bool                   `protobuf:"varint,4,opt,name=success,proto3" json:"success,omitempty"`
-	InstanceId    int64                  `protobuf:"varint,5,opt,name=instanceId,proto3" json:"instanceId,omitempty"`
+	DriverId      int64                  `protobuf:"varint,5,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	Extra         string                 `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -228,9 +228,9 @@ func (x *DriverRegResp) GetSuccess() bool {
 	return false
 }
 
-func (x *DriverRegResp) GetInstanceId() int64 {
+func (x *DriverRegResp) GetDriverId() int64 {
 	if x != nil {
-		return x.InstanceId
+		return x.DriverId
 	}
 	return 0
 }
@@ -245,7 +245,7 @@ func (x *DriverRegResp) GetExtra() string {
 type HeartbeatRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	InstanceId    int64                  `protobuf:"varint,2,opt,name=instanceId,proto3" json:"instanceId,omitempty"`
+	DriverId      int64                  `protobuf:"varint,2,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -287,9 +287,9 @@ func (x *HeartbeatRequest) GetTraceId() string {
 	return ""
 }
 
-func (x *HeartbeatRequest) GetInstanceId() int64 {
+func (x *HeartbeatRequest) GetDriverId() int64 {
 	if x != nil {
-		return x.InstanceId
+		return x.DriverId
 	}
 	return 0
 }
@@ -365,7 +365,7 @@ func (x *HeartbeatResponse) GetSuccess() bool {
 type DriverUnregisterRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TraceId       string                 `protobuf:"bytes,1,opt,name=traceId,proto3" json:"traceId,omitempty"`
-	InstanceId    int64                  `protobuf:"varint,2,opt,name=instanceId,proto3" json:"instanceId,omitempty"`
+	DriverId      int64                  `protobuf:"varint,2,opt,name=driverId,proto3" json:"driverId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -407,9 +407,9 @@ func (x *DriverUnregisterRequest) GetTraceId() string {
 	return ""
 }
 
-func (x *DriverUnregisterRequest) GetInstanceId() int64 {
+func (x *DriverUnregisterRequest) GetDriverId() int64 {
 	if x != nil {
-		return x.InstanceId
+		return x.DriverId
 	}
 	return 0
 }
@@ -420,12 +420,10 @@ const file_driver_driver_proto_rawDesc = "" +
 	"\n" +
 	"\x13driver/driver.proto\x12\x06driver\x1a\x1bgoogle/protobuf/empty.proto\"$\n" +
 	"\x04Pong\x12\x1c\n" +
-	"\ttimestamp\x18\x01 \x01(\tR\ttimestamp\"\xda\x01\n" +
+	"\ttimestamp\x18\x01 \x01(\tR\ttimestamp\"\xd6\x01\n" +
 	"\fDriverRegReq\x12\x18\n" +
-	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1e\n" +
-	"\n" +
-	"instanceId\x18\x02 \x01(\x03R\n" +
-	"instanceId\x12\x18\n" +
+	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1a\n" +
+	"\bdriverId\x18\x02 \x01(\x03R\bdriverId\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x1e\n" +
 	"\n" +
 	"driverType\x18\x04 \x01(\tR\n" +
@@ -434,31 +432,25 @@ const file_driver_driver_proto_rawDesc = "" +
 	"\n" +
 	"driverName\x18\x06 \x01(\tR\n" +
 	"driverName\x12\x14\n" +
-	"\x05extra\x18\a \x01(\tR\x05extra\"\x9f\x01\n" +
+	"\x05extra\x18\a \x01(\tR\x05extra\"\x9b\x01\n" +
 	"\rDriverRegResp\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
-	"\asuccess\x18\x04 \x01(\bR\asuccess\x12\x1e\n" +
-	"\n" +
-	"instanceId\x18\x05 \x01(\x03R\n" +
-	"instanceId\x12\x14\n" +
-	"\x05extra\x18\x06 \x01(\tR\x05extra\"L\n" +
+	"\asuccess\x18\x04 \x01(\bR\asuccess\x12\x1a\n" +
+	"\bdriverId\x18\x05 \x01(\x03R\bdriverId\x12\x14\n" +
+	"\x05extra\x18\x06 \x01(\tR\x05extra\"H\n" +
 	"\x10HeartbeatRequest\x12\x18\n" +
-	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1e\n" +
-	"\n" +
-	"instanceId\x18\x02 \x01(\x03R\n" +
-	"instanceId\"m\n" +
+	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1a\n" +
+	"\bdriverId\x18\x02 \x01(\x03R\bdriverId\"m\n" +
 	"\x11HeartbeatResponse\x12\x18\n" +
 	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\x05R\x04code\x12\x18\n" +
-	"\asuccess\x18\x04 \x01(\bR\asuccess\"S\n" +
+	"\asuccess\x18\x04 \x01(\bR\asuccess\"O\n" +
 	"\x17DriverUnregisterRequest\x12\x18\n" +
-	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1e\n" +
-	"\n" +
-	"instanceId\x18\x02 \x01(\x03R\n" +
-	"instanceId28\n" +
+	"\atraceId\x18\x01 \x01(\tR\atraceId\x12\x1a\n" +
+	"\bdriverId\x18\x02 \x01(\x03R\bdriverId28\n" +
 	"\x06Common\x12.\n" +
 	"\x04Ping\x12\x16.google.protobuf.Empty\x1a\f.driver.Pong\"\x002\xeb\x01\n" +
 	"\x15DriverInstanceService\x12:\n" +
